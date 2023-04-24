@@ -1,41 +1,34 @@
-//Document is the DOM can be accessed in the console with document.window.
-// Tree is from the top, html, body, p etc.
-
 //Problem: User interaction does not provide the correct results.
 //Solution: Add interactivity so the user can manage daily tasks.
 //Break things down into smaller steps and take each step at a time.
 
 
-// Event handling, user interaction is what starts the code execution.
-
-var taskInput = document.getElementById("new-task");//Add a new task.
-var addButton = document.getElementsByClassName("add");//first button
-var incompleteTaskHolder = document.getElementById("incomplete-tasks");//ul of #incompleteTasks
-var completedTasksHolder = document.getElementById("completed-tasks");//completed-tasks
+var taskInput = document.getElementById("new-task");
+var addButton = document.getElementsByTagName("button")[0];
+var incompleteTaskHolder = document.getElementById("incomplete-tasks");
+var completedTasksHolder = document.getElementById("completed-tasks");
 
 
-//New task list item
 var createNewTaskElement = function(taskString) {
 
     var listItem = document.createElement("li");
 
-    //input (checkbox)
-    var checkBox = document.createElement("input");//checkbx
-    //label
-    var label = document.createElement("label");//label
-    //input (text)
-    var editInput = document.createElement("input");//text
-    //button.edit
-    var editButton = document.createElement("button");//edit button
+    var checkBox = document.createElement("input");
 
-    //button.delete
-    var deleteButton = document.createElement("button");//delete button
-    var deleteButtonImg = document.createElement("img");//delete button image
+    var label = document.createElement("label");
+
+    var editInput = document.createElement("input");
+
+    var editButton = document.createElement("button");
+
+    var deleteButton = document.createElement("button");
+    var deleteButtonImg = document.createElement("img");
+
+    listItem.className = "task-item";
 
     label.innerText = taskString;
-    label.className="task";
+    label.className="task task-label";
 
-    //Each elements, needs appending
     checkBox.type="checkbox";
     checkBox.className = "task-checkbox"
     editInput.type = "text";
@@ -46,10 +39,10 @@ var createNewTaskElement = function(taskString) {
 
     deleteButton.className = "delete";
     deleteButtonImg.src = "./remove.svg";
+    deleteButtonImg.className = "delete-img";
     deleteButton.appendChild(deleteButtonImg);
 
 
-    //and appending.
     listItem.appendChild(checkBox);
     listItem.appendChild(label);
     listItem.appendChild(editInput);
@@ -62,11 +55,10 @@ var createNewTaskElement = function(taskString) {
 
 var addTask = function() {
     console.log("Add Task...");
-    //Create a new list item with the text from the #new-task:
+
     if (!taskInput.value) return;
     var listItem = createNewTaskElement(taskInput.value);
 
-    //Append listItem to incompleteTaskHolder
     incompleteTaskHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskCompleted);
 
@@ -74,7 +66,6 @@ var addTask = function() {
 
 }
 
-//Edit an existing task.
 
 var editTask = function() {
     console.log("Edit Task...");
@@ -100,7 +91,6 @@ var editTask = function() {
 };
 
 
-//Delete task.
 var deleteTask = function() {
     console.log("Delete Task...");
 
@@ -112,7 +102,6 @@ var deleteTask = function() {
 }
 
 
-//Mark task completed
 var taskCompleted = function() {
     console.log("Complete Task...");
 
@@ -139,7 +128,6 @@ var ajaxRequest=function(){
 //TODO: the glue to hold it all together.
 
 addButton.onclick = addTask;
-addButton.addEventListener("click", addTask);
 addButton.addEventListener("click", ajaxRequest);
 
 
@@ -171,8 +159,8 @@ for (var i = 0; i < completedTasksHolder.children.length; i++) {
 
 
 
-// Issues with usability don't get seen until they are in front of a human tester.
+//Problem: Issues with usability don't get seen until they are in front of a human tester.
 
-//prevent creation of empty tasks.
+//TODO: prevent creation of empty tasks.
 
-//Change edit to save when you are in edit mode.
+//TODO: change edit to save when you are in edit mode.
