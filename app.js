@@ -24,15 +24,15 @@ var createNewTaskElement = function(taskString) {
     var deleteButton = document.createElement("button");
     var deleteButtonImg = document.createElement("img");
 
-    listItem.className = "task-item";
+    listItem.className = "to-do-task task-item";
 
     label.innerText = taskString;
     label.className="task-label";
 
     checkBox.type="checkbox";
-    checkBox.className = "task-checkbox"
+    checkBox.className = "to-do task-checkbox"
     editInput.type = "text";
-    editInput.className = "task-input";
+    editInput.className = "to-do-task task-input";
 
     editButton.innerText = "Edit"; //innerText encodes special characters, HTML does not.
     editButton.className = "edit";
@@ -106,6 +106,8 @@ var taskCompleted = function() {
     console.log("Complete Task...");
 
     var listItem = this.parentNode;
+    listItem.classList.remove('to-do');
+    listItem.classList.remove('completed');
     completedTasksHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskIncomplete);
 }
@@ -116,7 +118,7 @@ var taskIncomplete=function(){
 
     var listItem = this.parentNode;
     incompleteTaskHolder.appendChild(listItem);
-    bindTaskEvents(listItem,taskCompleted);
+    bindTaskEvents(listItem, taskCompleted);
 }
 
 
